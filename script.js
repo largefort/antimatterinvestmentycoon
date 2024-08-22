@@ -20,6 +20,7 @@ function loadGame() {
         lastSaveTime = savedData.lastSaveTime;
         calculateOfflineEarnings();
     }
+    calculateAntimatterPerSecond(); // Ensure antimatterPerSecond is updated after loading game
 }
 
 // Save game data to localStorage
@@ -38,7 +39,7 @@ function saveGame() {
 function calculateOfflineEarnings() {
     const now = Date.now();
     const timeDifference = now - lastSaveTime;
-    offlineAntimatter = Math.floor(timeDifference / 1000); // e.g., 1 antimatter per second
+    offlineAntimatter = Math.floor(timeDifference / 1000) * antimatterPerSecond; // Calculate based on antimatterPerSecond
     antimatter += offlineAntimatter;
     document.getElementById('offline-antimatter-earned').innerText = offlineAntimatter;
     document.getElementById('offline-investments').innerText = offlineAntimatter * 0.1 * investments; // Placeholder for investment returns
@@ -90,10 +91,14 @@ document.getElementById('close-modal').addEventListener('click', function() {
 document.querySelectorAll('.nav-tab').forEach(button => {
     button.addEventListener('click', function() {
         document.querySelectorAll('.tab-content').forEach(tab => {
-            tab.classList.add('hidden');
+            tab.classList.remove('active-tab');
+        });
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.classList.remove('active-tab');
         });
         const targetTabContent = button.id.replace('-tab', '-content');
-        document.getElementById(targetTabContent).classList.remove('hidden');
+        document.getElementById(targetTabContent).classList.add('active-tab');
+        button.classList.add('active-tab');
     });
 });
 
@@ -113,6 +118,7 @@ function buyUpgrade(upgrade) {
         antimatter -= 100;
         autoCollectors += 1;
         document.getElementById('auto-collectors').innerText = autoCollectors;
+        calculateAntimatterPerSecond(); // Update antimatterPerSecond whenever autoCollectors change
         updateAntimatterDisplay();
     }
 }
@@ -180,7 +186,6 @@ particlesJS.load('particles-js', 'particles.json', function() {
 // Load game and start the game loop
 loadGame();
 setupEarningsGraph();
-calculateAntimatterPerSecond();
 setInterval(autoCollect, 1000); // Automatically collect antimatter every second
 setInterval(saveGame, 10000); // Autosave every 10 seconds
 
