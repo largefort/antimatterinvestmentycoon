@@ -1,0 +1,117 @@
+/* styles.css */
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: 'Arial', sans-serif;
+    background-color: #000;
+}
+
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+#game-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #00FF00;
+}
+
+#currency-display {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 24px;
+}
+
+#click-area {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+#floating-text-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+#nav-tab-bar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    background-color: #111;
+    padding: 10px;
+}
+
+.nav-tab {
+    color: #00FF00;
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.nav-tab:hover {
+    color: #00cc00;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+}
+
+.modal-content {
+    text-align: center;
+}
+
+#close-modal {
+    background: #00FF00;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    color: #000;
+}
+
+.tab-content {
+    display: none;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #00FF00;
+}
+
+.hidden {
+    display: none;
+}
+
+.active-tab {
+    display: block;
+}
+
+/* Additional Styles for Earnings Graph */
+#earnings-graph {
+    width: 100%;
+    height: 300px;
+    background: #111;
+    border: 1px solid #00FF00;
+    margin-top: 10px;
+}
