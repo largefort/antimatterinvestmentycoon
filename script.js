@@ -7,6 +7,7 @@ let autoCollectors = 0;
 let investments = 0;
 let offlineAntimatter = 0;
 let lastSaveTime = Date.now();
+let antimatterPerSecond = 0;
 
 // Load saved data from localStorage
 function loadGame() {
@@ -53,6 +54,7 @@ function showOfflineEarningsModal() {
 // Update antimatter count on screen
 function updateAntimatterDisplay() {
     document.getElementById('antimatter-count').innerText = antimatter;
+    document.getElementById('antimatter-ps').innerText = antimatterPerSecond;
 }
 
 // Handle click on the screen
@@ -125,6 +127,17 @@ function investAntimatter() {
     }
 }
 
+// Calculate antimatter per second
+function calculateAntimatterPerSecond() {
+    antimatterPerSecond = autoCollectors; // 1 antimatter per auto collector per second
+}
+
+// Automatically add antimatter per second
+function autoCollect() {
+    antimatter += antimatterPerSecond;
+    updateAntimatterDisplay();
+}
+
 // Chart.js setup for earnings graph
 function setupEarningsGraph() {
     const ctx = document.getElementById('earnings-graph').getContext('2d');
@@ -167,7 +180,9 @@ particlesJS.load('particles-js', 'particles.json', function() {
 // Load game and start the game loop
 loadGame();
 setupEarningsGraph();
-setInterval(gameLoop, 10000); // Autosave every 10 seconds
+calculateAntimatterPerSecond();
+setInterval(autoCollect, 1000); // Automatically collect antimatter every second
+setInterval(saveGame, 10000); // Autosave every 10 seconds
 
 // Add CSS animation for floating text
 const style = document.createElement('style');
