@@ -8,19 +8,24 @@
 </head>
 <body>
     <div id="particles-js"></div>
-    <div id="game-container">
-        <div id="currency-display">
-            <div id="antimatter-counter">Antimatter: <span id="antimatter-count">0</span></div>
-            <div id="antimatter-per-second">Antimatter/s: <span id="antimatter-ps">0</span></div>
-        </div>
-        <div id="click-area"></div>
-        <div id="floating-text-container"></div>
-    </div>
-    
+
     <div id="nav-tab-bar">
+        <button id="home-tab" class="nav-tab active-tab">Home</button>
         <button id="skilling-tab" class="nav-tab">Skilling</button>
         <button id="shop-tab" class="nav-tab">Shop</button>
         <button id="marketing-tab" class="nav-tab">Marketing</button>
+    </div>
+
+    <!-- Home Content -->
+    <div id="home-content" class="tab-content active-tab">
+        <div id="game-container">
+            <div id="currency-display">
+                <div id="antimatter-counter">Antimatter: <span id="antimatter-count">0</span></div>
+                <div id="antimatter-per-second">Antimatter/s: <span id="antimatter-ps">0</span></div>
+            </div>
+            <div id="click-area"></div>
+            <div id="floating-text-container"></div>
+        </div>
     </div>
 
     <!-- Skilling Content -->
