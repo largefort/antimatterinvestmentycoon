@@ -139,3 +139,33 @@ body, html {
     border: 1px solid #00FF00;
     margin-top: 10px;
 }
+.sci-fi-button {
+    background: linear-gradient(45deg, #00ff00, #005500);
+    border: 2px solid #00ff00;
+    color: #ffffff;
+    font-size: 18px;
+    padding: 10px 20px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background 0.3s, border 0.3s;
+    border-radius: 5px;
+    box-shadow: 0 0 15px #00ff00;
+}
+
+.sci-fi-button:hover {
+    background: linear-gradient(45deg, #005500, #00ff00);
+    border-color: #00cc00;
+}
+
+.sci-fi-button:active {
+    background: #003300;
+    border-color: #00ff00;
+}
+
+.sci-fi-button:disabled {
+    background: #333;
+    border-color: #555;
+    color: #777;
+    cursor: not-allowed;
+}
+
