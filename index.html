@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antimatter Investment Tycoon</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="particles-js"></div>
+    <div id="game-container">
+        <div id="currency-display">Antimatter: <span id="antimatter-count">0</span></div>
+        <div id="click-area"></div>
+        <div id="floating-text-container"></div>
+    </div>
+    
+    <div id="nav-tab-bar">
+        <button id="skilling-tab" class="nav-tab">Skilling</button>
+        <button id="shop-tab" class="nav-tab">Shop</button>
+        <button id="marketing-tab" class="nav-tab">Marketing</button>
+    </div>
+
+    <!-- Skilling Content -->
+    <div id="skilling-content" class="tab-content hidden">
+        <h2>Skilling</h2>
+        <p>Improve your antimatter collection skills.</p>
+        <button onclick="upgradeSkill('clickPower')">Increase Click Power (Cost: 10 Antimatter)</button>
+        <p>Current Click Power: <span id="click-power">1</span></p>
+    </div>
+
+    <!-- Shop Content -->
+    <div id="shop-content" class="tab-content hidden">
+        <h2>Shop</h2>
+        <p>Buy upgrades to enhance your antimatter collection.</p>
+        <button onclick="buyUpgrade('autoCollector')">Auto Collector (Cost: 100 Antimatter)</button>
+        <p>Current Auto Collectors: <span id="auto-collectors">0</span></p>
+    </div>
+
+    <!-- Marketing Content -->
+    <div id="marketing-content" class="tab-content hidden">
+        <h2>Marketing</h2>
+        <p>Invest your antimatter to earn more while offline.</p>
+        <button onclick="investAntimatter()">Invest Antimatter (Cost: 50 Antimatter)</button>
+        <p>Current Investments: <span id="investments">0</span></p>
+        <h3>Earnings Graph</h3>
+        <canvas id="earnings-graph"></canvas>
+    </div>
+
+    <div id="offline-earnings-modal" class="modal">
+        <div class="modal-content">
+            <h2>Offline Earnings</h2>
+            <p>You earned <span id="offline-antimatter-earned"></span> antimatter while you were away!</p>
+            <p>Your investments have also generated <span id="offline-investments"></span> antimatter.</p>
+            <button id="close-modal">Close</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
