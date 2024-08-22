@@ -21,6 +21,7 @@ function loadGame() {
         calculateOfflineEarnings();
     }
     calculateAntimatterPerSecond(); // Ensure antimatterPerSecond is updated after loading game
+    updateUI(); // Immediately update UI upon loading
 }
 
 // Save game data to localStorage
@@ -99,6 +100,7 @@ document.querySelectorAll('.nav-tab').forEach(button => {
         const targetTabContent = button.id.replace('-tab', '-content');
         document.getElementById(targetTabContent).classList.add('active-tab');
         button.classList.add('active-tab');
+        updateUI(); // Ensure UI updates immediately upon switching tabs
     });
 });
 
@@ -178,6 +180,20 @@ function setupEarningsGraph() {
     });
 }
 
+// Function to update the UI instantly
+function updateUI() {
+    // Update the Skilling tab
+    document.getElementById('click-power').innerText = clickPower;
+
+    // Update the Shop tab
+    document.getElementById('auto-collectors').innerText = autoCollectors;
+
+    // Update the Marketing tab
+    document.getElementById('investments').innerText = investments;
+
+    updateAntimatterDisplay(); // Ensure the main display is up-to-date
+}
+
 // Initialize particles.js
 particlesJS.load('particles-js', 'particles.json', function() {
     console.log('particles.js loaded');
@@ -187,7 +203,7 @@ particlesJS.load('particles-js', 'particles.json', function() {
 loadGame();
 setupEarningsGraph();
 setInterval(autoCollect, 1000); // Automatically collect antimatter every second
-setInterval(saveGame, 10000); // Autosave every 10 seconds
+setInterval(saveGame, 1000); // Autosave every 10 seconds
 
 // Add CSS animation for floating text
 const style = document.createElement('style');
