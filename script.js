@@ -8,16 +8,17 @@ let investments = 0;
 let offlineAntimatter = 0;
 let lastSaveTime = Date.now();
 let antimatterPerSecond = 0;
+const investmentMultiplier = 0.1; // Multiplier for earnings from investments
 
 // Load saved data from localStorage
 function loadGame() {
     const savedData = JSON.parse(localStorage.getItem('gameData'));
     if (savedData) {
-        antimatter = savedData.antimatter;
+        antimatter = savedData.antimatter || 0;
         clickPower = savedData.clickPower || 1;
         autoCollectors = savedData.autoCollectors || 0;
         investments = savedData.investments || 0;
-        lastSaveTime = savedData.lastSaveTime;
+        lastSaveTime = savedData.lastSaveTime || Date.now();
         calculateOfflineEarnings();
     }
     calculateAntimatterPerSecond(); // Ensure antimatterPerSecond is updated after loading game
@@ -39,11 +40,24 @@ function saveGame() {
 // Calculate offline earnings
 function calculateOfflineEarnings() {
     const now = Date.now();
-    const timeDifference = now - lastSaveTime;
-    offlineAntimatter = Math.floor(timeDifference / 1000) * antimatterPerSecond; // Calculate based on antimatterPerSecond
+    const timeDifferenceInSeconds = (now - lastSaveTime) / 1000;
+
+    // Calculate offline antimatter from auto collectors
+    const offlineCollectorEarnings = autoCollectors * timeDifferenceInSeconds;
+
+    // Calculate offline antimatter from investments
+    const offlineInvestmentEarnings = investments * investmentMultiplier * timeDifferenceInSeconds;
+
+    // Total offline antimatter earnings
+    offlineAntimatter = offlineCollectorEarnings + offlineInvestmentEarnings;
+
+    // Add offline earnings to the current antimatter
     antimatter += offlineAntimatter;
-    document.getElementById('offline-antimatter-earned').innerText = offlineAntimatter;
-    document.getElementById('offline-investments').innerText = offlineAntimatter * 0.1 * investments; // Placeholder for investment returns
+
+    // Update the modal with offline earnings information
+    document.getElementById('offline-antimatter-earned').innerText = Math.floor(offlineAntimatter);
+    document.getElementById('offline-investments').innerText = Math.floor(offlineInvestmentEarnings);
+
     showOfflineEarningsModal();
 }
 
@@ -55,8 +69,8 @@ function showOfflineEarningsModal() {
 
 // Update antimatter count on screen
 function updateAntimatterDisplay() {
-    document.getElementById('antimatter-count').innerText = antimatter;
-    document.getElementById('antimatter-ps').innerText = antimatterPerSecond;
+    document.getElementById('antimatter-count').innerText = Math.floor(antimatter);
+    document.getElementById('antimatter-ps').innerText = Math.floor(antimatterPerSecond);
 }
 
 // Handle click on the screen
@@ -214,3 +228,4 @@ style.innerHTML = `
     }
 `;
 document.head.appendChild(style);
+
